@@ -1,6 +1,7 @@
 # wzk_auto
 For jsjzyk.36ve.com
 ## 如何使用
+*请把 `main.py` 中的 `http` 替换为 `https` 再使用*
 ### 安装依赖包
 `pip install -r requirements.txt`
 ### 输入课程ID
