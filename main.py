@@ -91,6 +91,23 @@ def do_auto_new(link, userid, courseid):
         return 1
     return 0
 
+# 课程评论
+def do_auto_new_save(courseid):
+    url = wzk_url + '/?q=course_message/' + str(courseid) + '/save/callback'
+    # url = wzk_url + '/?q=save_user_item_progress/' + str(courseid) + '/' + link[len(link) - link[::-1].find(
+    #     '/'):] + '/' + str(userid)
+    print(url)
+    data = {
+        'flag': 'question',
+        'detail': '<p> 如何写作 </p>',
+        'title': '课程提问',
+        'click_from': 'new_platfrom'
+    }
+    try:
+        request.post(url, data, header)
+    except:
+        return 1
+    return 0
 
 def write_all_links(courseid, links, filename):
     with open(filename, 'a', newline='') as file:
@@ -139,6 +156,9 @@ if __name__ == '__main__':
                 for _ in f:
                     logging("!","切换课程...")
                     for i in range(1, len(_)):
+                        if i < 30:
+                            logging("!", "开始评论了------")
+                            do_auto_new_save(courseid=_[0])
                         while i % 66 == 0:
                             logging("*","重新登录中")
                             login(username, password)
